@@ -1,0 +1,448 @@
+/* ===== 1. WARNA & FONT: ubah di sini saja =====
+   Putih  : latar halaman
+   Charcoal: teks dan tombol gelap
+   Kuning : penekanan (tombol, garis bawah, sorotan)
+   Slate  : teks pendukung, garis, label  */
+:root{
+  --white:#ffffff;
+  --charcoal:#101820;
+  --yellow:#FEE715;
+  --slate:#5C6B7A;
+  --bg:var(--white); --text:var(--charcoal); --muted:var(--slate);
+  --line:color-mix(in srgb,var(--slate) 25%,var(--white));
+  --soft:color-mix(in srgb,var(--slate) 8%,var(--white));
+  --gutter:max(clamp(20px,5vw,96px),calc((100vw - 1680px)/2 + clamp(20px,5vw,96px)));
+  --sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+/* ===== 2. DASAR ===== */
+html{scroll-behavior:smooth;scroll-padding-top:64px;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.7}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--charcoal);outline-offset:3px;border-radius:2px}
+/* Lebar penuh di PC; jarak tepi menyesuaikan layar */
+.container{width:100%;max-width:1680px;margin:0 auto;padding:0 clamp(20px,5vw,96px)}
+h2{font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 10px}
+.lead{color:var(--muted);margin:0;max-width:42em}
+h3{margin:0;font-size:1.15rem;font-weight:600}
+main.container{max-width:none;padding:0}
+/* ===== 3. NAVIGASI ===== */
+.nav{position:sticky;top:0;z-index:10;background:var(--yellow);color:var(--charcoal);padding-top:env(safe-area-inset-top,0px)}
+.nav .container{display:flex;align-items:center;gap:clamp(16px,2.5vw,36px);min-height:64px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.nav strong{margin-right:auto;font-size:1.05rem}
+.nav a{text-decoration:none;color:var(--charcoal);font-size:.95rem;font-weight:600;padding:6px 0}
+.nav a:hover{box-shadow:inset 0 -3px var(--charcoal)}
+/* ===== 4. HERO: satu layar penuh di PC ===== */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(32px,6vw,120px);align-items:center;min-height:calc(100vh - 64px);min-height:calc(100svh - 64px);padding-block:48px;padding-inline:var(--gutter)}
+.hero h1{font-size:clamp(2rem,4.4vw,4.2rem);line-height:1.08;letter-spacing:-.03em;margin:0 0 20px;text-wrap:balance}
+/* Label posisi: sorotan ala stabilo, lembut dan sedikit miring */
+.role{position:relative;isolation:isolate;display:inline-block;color:var(--charcoal);font-weight:700;font-size:clamp(1.15rem,2vw,1.5rem);margin:0 0 24px;padding:0 4px}
+.role::after{content:"";position:absolute;z-index:-1;left:-8px;right:-8px;bottom:1px;height:62%;background:var(--yellow);border-radius:999px 60px 999px 60px/60px 999px 60px 999px;transform:rotate(-1.5deg)}
+.hero .lead{font-size:1.15rem;margin-bottom:20px}
+/* Foto: bentuk lengkung (arch) + bidang kuning miring di belakangnya */
+.photo{--r:999px 999px 32px 32px;position:relative;width:100%;max-width:440px;justify-self:center;margin-right:22px;aspect-ratio:4/5;display:grid;place-items:center;color:var(--charcoal);font-weight:600}
+.photo::before{content:"";position:absolute;inset:0;background:var(--yellow);border-radius:var(--r);transform:translate(22px,18px) rotate(5deg)}
+.photo::after{content:"";position:absolute;inset:0;border:2px solid var(--charcoal);border-radius:var(--r);transform:translate(-12px,-10px) rotate(-3deg)}
+.photo img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:var(--r)}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 26px;border-radius:6px;font-weight:600;font-size:.97rem;text-decoration:none;border:1.5px solid var(--charcoal);color:var(--charcoal);margin:8px 12px 0 0}
+.btn.primary{background:var(--yellow);border-color:var(--yellow);color:var(--charcoal)}
+.btn:hover{background:var(--charcoal);border-color:var(--charcoal);color:var(--yellow)}
+/* ===== 5. BAGIAN: judul di kiri, isi di kanan ===== */
+section{display:grid;grid-template-columns:minmax(220px,3fr) 9fr;gap:clamp(24px,5vw,96px);padding-block:clamp(56px,8vw,112px);padding-inline:var(--gutter);color:var(--text);background:var(--sbg,var(--white))}
+.head{align-self:start;position:sticky;top:96px}
+.content{min-width:0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:8px}
+.fact{padding:20px;border:1px solid var(--line);border-radius:8px}
+.fact small{display:block;color:var(--muted)}
+.fact b{font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.card{padding:24px;border:1px solid var(--line);border-radius:8px}
+.card p{margin:6px 0 14px;color:var(--muted);font-size:.95rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:0;list-style:none}
+.tags li{padding:3px 10px;background:var(--soft);border-radius:4px;font-size:.82rem;font-weight:500}
+/* ===== 6. PENGALAMAN ===== */
+.exp{display:grid;grid-template-columns:190px 1fr;gap:4px 28px;padding:24px 0;border-bottom:1px solid var(--line)}
+.exp:first-child{padding-top:0}
+.exp .when{color:var(--muted);font-size:.95rem}
+.exp .where{color:var(--muted);font-weight:500;font-size:.95rem}
+.exp p{margin:8px 0 0;color:var(--muted);font-size:.97rem;max-width:44em}
+/* ===== 7. PROYEK & SERTIFIKAT ===== */
+.project{display:block;text-decoration:none;border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:border-color .15s,transform .15s,box-shadow .15s}
+.project:hover{border-color:var(--charcoal);box-shadow:0 4px 0 var(--yellow);transform:translateY(-2px)}
+.thumb{aspect-ratio:16/9;background:var(--soft);display:grid;place-items:center;color:var(--muted);font-size:.9rem}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.project .body{padding:22px}
+.project .meta{display:flex;justify-content:space-between;color:var(--muted);font-size:.85rem}
+.project p{margin:6px 0 12px;color:var(--muted);font-size:.95rem}
+.go{display:inline-block;margin-top:14px;color:var(--charcoal);font-weight:600;font-size:.92rem;text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:3px;text-underline-offset:3px}
+/* ===== 8. KONTAK & FOOTER ===== */
+.contact a{display:flex;justify-content:space-between;gap:16px;min-height:56px;align-items:center;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600;font-size:1.1rem;transition:padding .15s}
+.contact a:first-child{border-top:1px solid var(--line)}
+.contact a:hover{background:var(--soft);box-shadow:inset 4px 0 var(--yellow);padding-left:16px}
+.contact a span{color:var(--muted);font-weight:400;font-size:.95rem;text-align:right;overflow-wrap:anywhere}
+footer{background:var(--charcoal);padding:32px 0 40px;color:color-mix(in srgb,var(--slate) 45%,#fff);font-size:.9rem}
+/* ===== 8b. GAYA SOFT & MINIMALIS (bentuk bulat, banyak ruang putih) ===== */
+html{scroll-padding-top:88px}
+/* Menu: pill kuning melayang */
+.nav{top:0;background:transparent;padding:12px var(--gutter) 0}
+.nav .container{max-width:none;background:var(--yellow);border-radius:999px;padding:0 28px;min-height:56px}
+/* Tombol pill */
+.btn{border-radius:999px;border-width:2px}
+/* Judul bagian: titik kuning kecil di ujung */
+.head h2::after{content:"";display:block;width:48px;height:5px;border-radius:3px;background:var(--yellow);margin-top:16px}
+section{padding-block:clamp(64px,9vw,128px)}
+/* Kartu lembut tanpa garis tepi */
+.card,.fact{border:0;border-radius:24px;background:var(--soft);padding:24px}
+.fact:nth-child(1){background:var(--yellow)}
+.fact:nth-child(1) small{color:color-mix(in srgb,var(--charcoal) 70%,var(--yellow))}
+.tags li{border-radius:999px;padding:4px 12px;background:var(--white)}
+/* Pengalaman: tanggal berbentuk pill kuning */
+.exp{border-bottom:1px dashed var(--line)}
+.exp .when{align-self:start;justify-self:start;background:var(--yellow);color:var(--charcoal);font-weight:600;font-size:.85rem;line-height:1.6;padding:3px 14px;border-radius:999px}
+/* Proyek & sertifikat: kartu bulat, gambar di dalam bingkai */
+.project{border:0;background:var(--soft);border-radius:28px;padding:10px}
+.project .thumb{border-radius:20px;overflow:hidden;background:color-mix(in srgb,var(--yellow) 28%,var(--white))}
+.project .body{padding:18px 14px 14px}
+.project:hover{border:0;box-shadow:0 0 0 3px var(--yellow);transform:translateY(-4px) rotate(-.6deg)}
+/* Kontak: kartu kuning bulat, bukan blok penuh */
+section#contact{--sbg:var(--yellow);--muted:color-mix(in srgb,var(--charcoal) 72%,var(--yellow));--line:color-mix(in srgb,var(--charcoal) 22%,var(--yellow));margin:0 clamp(12px,2vw,32px) 24px;padding-inline:max(24px,calc(var(--gutter) - clamp(12px,2vw,32px)));border-radius:40px}
+#contact a{border-radius:16px}
+#contact a:hover{background:rgba(255,255,255,.5);box-shadow:none;padding-inline:16px}
+/* Footer ringan */
+footer{background:none;color:var(--muted);text-align:center;padding:24px 0 40px}
+/* ===== 8c. DEKORASI RINGAN (hapus blok ini kalau mau polos lagi) ===== */
+section{background:var(--sbg,transparent)}
+/* Titik-titik halus di bagian atas halaman, memudar ke bawah */
+body{position:relative}
+body::before{content:"";position:absolute;inset:0 0 auto 0;height:110vh;z-index:-1;pointer-events:none;
+  background-image:radial-gradient(color-mix(in srgb,var(--slate) 30%,var(--white)) 1.3px,transparent 1.4px);background-size:26px 26px;
+  -webkit-mask-image:linear-gradient(#000 35%,transparent);mask-image:linear-gradient(#000 35%,transparent)}
+/* Hero: cahaya kuning lembut + bintang */
+.hero{position:relative;overflow:clip}
+.hero>*{position:relative;z-index:1}
+.hero::before{content:"";position:absolute;z-index:0;width:460px;height:460px;border-radius:50%;background:var(--yellow);opacity:.3;filter:blur(80px);left:-140px;bottom:-160px}
+.hero::after{content:"\2726";position:absolute;z-index:2;right:calc(var(--gutter) - 6px);top:10%;font-size:clamp(40px,5vw,72px);line-height:1;color:var(--charcoal);transform:rotate(12deg)}
+/* Kartu seperti stiker: sedikit miring, lurus saat di-hover */
+.fact{transition:transform .2s}
+.fact:nth-child(odd){transform:rotate(-1.2deg)}
+.fact:nth-child(even){transform:rotate(1deg)}
+.fact:hover,.card:hover{transform:rotate(0) translateY(-3px)}
+.card{transition:transform .2s}
+/* Bintang di kartu kontak */
+section#contact{position:relative;overflow:clip}
+section#contact::after{content:"\2726";position:absolute;right:clamp(20px,4vw,56px);top:clamp(14px,2.5vw,32px);font-size:clamp(24px,3vw,40px);line-height:1;color:var(--charcoal);transform:rotate(-10deg)}
+@media (max-width:900px){.hero::after{display:none}}
+@media (prefers-reduced-motion:reduce){.fact,.card{transition:none}}
+/* ===== 8d. KONTAK: tombol pill ala stiker, rata tengah ===== */
+section#contact{grid-template-columns:1fr;justify-items:center;text-align:center;gap:22px;padding-block:clamp(48px,6vw,80px)}
+#contact .head{position:static}
+#contact h2{font-size:clamp(2rem,4.5vw,3.25rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:10px}
+#contact .head h2::after{background:var(--white);margin-inline:auto}
+#contact .lead{margin-inline:auto;font-size:1rem}
+#contact .content{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;width:100%}
+section#contact .content a{display:inline-flex;flex-direction:row;align-items:center;gap:8px;min-height:46px;padding:0 20px;background:var(--white);color:var(--charcoal);border:2px solid var(--charcoal);border-radius:999px;font-size:.92rem;font-weight:700;box-shadow:3px 3px 0 var(--charcoal);transition:transform .15s,box-shadow .15s}
+section#contact .content a span{font-weight:500;font-size:.82rem;color:var(--slate);text-align:left}
+section#contact .content a:first-child{background:var(--charcoal);color:var(--yellow)}
+section#contact .content a:first-child span{color:color-mix(in srgb,var(--slate) 40%,var(--white))}
+section#contact .content a:nth-child(odd){transform:rotate(-1.5deg)}
+section#contact .content a:nth-child(even){transform:rotate(1.5deg)}
+section#contact .content a:hover{background:var(--white);padding-inline:20px;box-shadow:1px 1px 0 var(--charcoal);transform:translate(2px,2px) rotate(0)}
+section#contact .content a:first-child:hover{background:var(--charcoal)}
+section#contact::before{content:"\2726";position:absolute;left:clamp(20px,5vw,72px);bottom:clamp(20px,4vw,48px);font-size:clamp(20px,2.4vw,32px);line-height:1;color:var(--charcoal);transform:rotate(14deg)}
+@media (max-width:560px){section#contact .content a{width:100%;justify-content:space-between}}
+@media (prefers-reduced-motion:reduce){section#contact .content a{transition:none}}
+/* ===== 8e. PENGALAMAN: kartu 2 kolom, judul kelompok menempel sejajar judul "Pengalaman" ===== */
+.exp-group{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:96px}
+.exp-group:last-child{margin-bottom:0}
+/* Judul kelompok berhenti sejajar dengan judul "Pengalaman" (top sama dengan #experience .head) */
+#experience .head{top:80px}
+.group-title{flex:0 0 100%;position:sticky;top:80px;z-index:5;display:flex;align-items:center;gap:12px;margin:0;padding:8px 0 14px;background:var(--white);border-bottom:3px solid var(--yellow);font-size:1.1rem;font-weight:700;letter-spacing:-.01em}
+.group-title::before{content:"";flex:none;width:4px;height:1.2em;border-radius:2px;background:var(--yellow)}
+.group-title::after{content:"";position:absolute;left:0;right:0;bottom:100%;height:12px;background:var(--white)}
+/* Kartu entri: tahun, posisi, nama instansi, deskripsi */
+.exp-group .exp{flex:0 0 calc(50% - 8px);display:flex;flex-direction:column;gap:12px;padding:24px;background:var(--soft);border:0;border-radius:20px}
+.exp-group .exp > div:last-child{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.exp-group .exp h3{font-size:1.2rem;line-height:1.3}
+/* Organisasi: judul setinggi 2 baris supaya chip, deskripsi, dan tombol sejajar antar kartu */
+@media (min-width:561px){
+  .exp-group.organisasi .exp h3{min-height:2.6em}
+}
+.exp-group .exp p{margin:0}
+/* Nama instansi: chip outline dengan ikon gedung */
+.exp-group .exp .where{display:inline-flex;align-items:center;gap:8px;padding:5px 14px 5px 10px;border:1.5px solid var(--charcoal);border-radius:999px;background:var(--white);color:var(--charcoal);font-weight:600;font-size:.9rem}
+.exp-group .exp .where::before{content:"";flex:none;width:15px;height:15px;background:var(--charcoal);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 21V3h10v6h6v12h-7v-5h-2v5H4zm3-14h2V5H7v2zm0 4h2V9H7v2zm0 4h2v-2H7v2zm10-2h-2v2h2v-2zm0-4h-2v2h2V9z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 21V3h10v6h6v12h-7v-5h-2v5H4zm3-14h2V5H7v2zm0 4h2V9H7v2zm0 4h2v-2H7v2zm10-2h-2v2h2v-2zm0-4h-2v2h2V9z'/%3E%3C/svg%3E") center/contain no-repeat}
+/* Proyek & sertifikat: 2 kolom di PC */
+#projects .grid,#certificates .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:900px){
+  .group-title{top:68px}
+  .group-title::after{height:0}
+}
+@media (max-width:560px){
+  .exp-group .exp{flex-basis:100%}
+  #projects .grid,#certificates .grid{grid-template-columns:1fr}
+}
+/* Link sertifikat di kartu pengalaman: selalu di dasar kartu */
+.exp-group .exp > div:last-child{flex:1}
+.exp-group .exp .go{margin-top:auto;padding-top:6px}
+.exp-group .exp .go::after{content:" \2197"}
+/* Dokumentasi kegiatan (foto) + tombol sertifikat kecil di pojok kartu */
+.exp-group .exp{position:relative}
+.exp .doc{aspect-ratio:2/1;border-radius:14px;overflow:hidden;background:color-mix(in srgb,var(--yellow) 25%,var(--white));display:grid;place-items:center;color:var(--muted);font-size:.85rem}
+.exp .doc img{width:100%;height:100%;object-fit:cover;display:block}
+.exp .cert{position:absolute;top:22px;right:24px;z-index:2;display:inline-flex;align-items:center;gap:4px;min-height:32px;padding:0 13px;background:var(--charcoal);color:var(--yellow);border-radius:999px;font-size:.8rem;font-weight:700;text-decoration:none;transition:background .15s,color .15s,box-shadow .15s}
+.exp .cert::after{content:"\2197"}
+.exp .cert:hover,.exp .cert:focus-visible{background:var(--yellow);color:var(--charcoal);box-shadow:0 0 0 2px var(--charcoal)}
+.exp:has(.doc) .cert{top:34px;right:34px}
+/* ===== 8f. ORGANISASI & KEPANITIAAN: klip foto bertumpuk + jendela rincian ===== */
+.ph{width:100%;height:100%;min-height:60px;display:grid;place-items:center;background:color-mix(in srgb,var(--yellow) 25%,var(--white));color:var(--muted);font-size:.8rem}
+.photo .ph{position:relative;z-index:1;border-radius:var(--r);background:var(--yellow);color:var(--charcoal)}
+.exp.has-dialog{cursor:pointer;transition:transform .2s,box-shadow .2s}
+.exp.has-dialog:hover{transform:translateY(-3px);box-shadow:0 0 0 3px var(--yellow)}
+/* Tiga foto bertumpuk, diklip dengan selotip kuning */
+.stack{position:relative;aspect-ratio:16/9;margin:4px 0 6px}
+.stack figure{position:absolute;margin:0;width:50%;aspect-ratio:10/9;padding:5px 5px 14px;background:var(--white);border-radius:4px;box-shadow:0 6px 14px rgba(16,24,32,.18);transition:transform .3s}
+.stack figure::before{content:"";position:absolute;z-index:2;top:-9px;left:50%;width:46px;height:16px;margin-left:-23px;background:color-mix(in srgb,var(--yellow) 88%,transparent);border-radius:2px;transform:rotate(-4deg)}
+.stack img,.stack .ph{width:100%;height:100%;object-fit:cover;display:block}
+.stack figure:nth-child(1){left:3%;top:12%;transform:rotate(-8deg);z-index:1}
+.stack figure:nth-child(2){right:3%;top:8%;transform:rotate(7deg);z-index:2}
+.stack figure:nth-child(3){left:25%;top:20%;transform:rotate(-1deg);z-index:3}
+.has-dialog:hover .stack figure:nth-child(1){transform:rotate(-12deg) translateX(-8px)}
+.has-dialog:hover .stack figure:nth-child(2){transform:rotate(11deg) translateX(8px)}
+.has-dialog:hover .stack figure:nth-child(3){transform:rotate(0) translateY(-4px)}
+.exp:has(.stack) .cert{top:16px;right:16px;z-index:5}
+.exp .more{margin-top:auto;padding:6px 0 0;border:0;background:none;font:inherit;font-weight:700;font-size:.9rem;color:var(--charcoal);cursor:pointer;text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:3px;text-underline-offset:4px}
+.exp .more::after{content:" \2192"}
+.exp .more:focus-visible{outline:3px solid var(--charcoal);outline-offset:3px;border-radius:2px}
+/* Jendela (dialog) */
+body:has(dialog[open]){overflow:hidden}
+dialog.dlg{width:min(980px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:28px;background:var(--white);color:var(--text);overflow:hidden;box-shadow:0 24px 80px rgba(16,24,32,.35)}
+dialog.dlg[open]{animation:dlgin .22s ease}
+dialog.dlg::backdrop{background:rgba(16,24,32,.55);backdrop-filter:blur(3px)}
+@keyframes dlgin{from{opacity:0;transform:translateY(14px) scale(.98)}}
+.dlg-inner{max-height:calc(100dvh - 48px);overflow:auto;overscroll-behavior:contain}
+.dlg-head{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:22px 28px 18px;background:var(--white);border-bottom:3px solid var(--yellow)}
+.dlg-head h3{font-size:clamp(1.25rem,3vw,1.7rem);line-height:1.2;letter-spacing:-.02em}
+.dlg-head p{margin:4px 0 0;color:var(--muted);font-size:.95rem}
+.dlg-close{flex:none;min-height:40px;padding:0 16px;border:0;border-radius:999px;background:var(--charcoal);color:var(--yellow);font:inherit;font-weight:700;font-size:.85rem;cursor:pointer}
+.dlg-close:hover{background:var(--yellow);color:var(--charcoal);box-shadow:0 0 0 2px var(--charcoal)}
+.dlg-body{padding:24px 28px 32px}
+/* Rincian kegiatan (BEM, UKM) */
+.act-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.act{background:var(--soft);border-radius:20px;padding:10px;overflow:hidden}
+.act-img{aspect-ratio:4/3;border-radius:14px;overflow:hidden}
+.act-img img{width:100%;height:100%;object-fit:cover;display:block}
+.act-body{padding:14px 8px 8px}
+.act h4{margin:0 0 4px;font-size:1.05rem;line-height:1.3}
+.act p{margin:0;color:var(--muted);font-size:.93rem}
+/* Galeri kepanitiaan: 1 foto besar + 4 kecil, rapi di PC (4 kolom) dan HP (2 kolom) */
+.gal-title{display:flex;align-items:center;gap:10px;margin:28px 0 12px;font-size:1rem;font-weight:700}
+.gal-title:first-child{margin-top:0}
+.gal-title::before{content:"";width:4px;height:1.2em;border-radius:2px;background:var(--yellow)}
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(100px,14vw,140px);grid-auto-flow:dense;gap:10px}
+.gal figure{margin:0;border-radius:14px;overflow:hidden;background:var(--soft)}
+.gal figure:first-child{grid-column:span 2;grid-row:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.gal figure:hover img{transform:scale(1.04)}
+@media (max-width:600px){
+  dialog.dlg{width:100%;margin:auto 0 0;border-radius:24px 24px 0 0}
+  .dlg-inner{max-height:92dvh}
+  .dlg-head{padding:16px 18px 14px}
+  .dlg-body{padding:18px 18px 28px}
+  .act-grid{grid-template-columns:1fr}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:110px;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){dialog.dlg[open]{animation:none}.stack figure,.gal img,.exp.has-dialog{transition:none}}
+/* ===== 8g. Foto bergeser per kegiatan (klik foto = foto berikutnya) ===== */
+.act-img{position:relative}
+.act-img>img,.act-img>.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s}
+.act-img>.on{opacity:1}
+.act-img[role="button"]{cursor:pointer}
+.act-img[role="button"]:focus-visible{outline:3px solid var(--charcoal);outline-offset:3px}
+.act-count{position:absolute;right:10px;bottom:10px;z-index:2;padding:4px 12px;border-radius:999px;background:var(--charcoal);color:var(--yellow);font-size:.78rem;font-weight:700;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.act-img>img,.act-img>.ph{transition:none}}
+/* ===== 9. TABLET & HP ===== */
+@media (max-width:900px){
+  body{font-size:16px}
+  .hero{grid-template-columns:1fr;min-height:0;gap:28px;padding-block:32px 56px}
+  .photo{order:-1;max-width:200px;justify-self:start;margin-left:12px}
+  section{grid-template-columns:1fr;gap:24px}
+  .head{position:static}
+}
+@media (max-width:560px){
+  .exp{grid-template-columns:1fr;gap:2px}
+  .grid{grid-template-columns:1fr}
+  .btn{width:100%;justify-content:center;margin-right:0}
+  .contact a{flex-direction:column;align-items:flex-start;gap:0;padding:10px 0}
+  .contact a span{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.project{transition:none}}
+
+.thumb-multi{
+  display:flex;
+  gap:10px;
+  padding:12px;
+  overflow:hidden;
+}
+.thumb-multi img{
+  flex:1 1 0;
+  min-width:0;
+  width:auto;
+  height:100%;
+  object-fit:cover;
+  object-position:top;   /* bagian atas HP yang ditampilkan */
+  border-radius:14px;
+}
+
+/* Tombol "Buka proyek" (HANYA di bagian Proyek) */
+#projects .project .go{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  min-height:32px;
+  padding:0 14px;
+  margin-top:14px;
+  background:var(--yellow);
+  color:var(--charcoal);
+  border-radius:999px;
+  font-size:.8rem;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 0 0 2px var(--charcoal);
+  transition:background .15s,color .15s,box-shadow .15s;
+}
+#projects .project .go::after{content:"\2197"}
+#projects .project .go:hover,
+#projects .project .go:focus-visible{
+  background:var(--charcoal);
+  color:var(--yellow);
+}
+
+/* ===== Carousel thumbnail proyek ===== */
+.thumb-carousel{display:block;position:relative;overflow:hidden}
+.thumb-carousel .track{display:flex;height:100%;transition:transform .6s ease}
+.thumb-carousel .track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;object-position:top}
+.thumb-carousel .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px;pointer-events:none}
+.thumb-carousel .dots i{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.8);box-shadow:0 0 0 1px rgba(16,24,32,.35);transition:width .3s,background .3s}
+.thumb-carousel .dots i.on{width:20px;background:var(--yellow)}
+@media (prefers-reduced-motion:reduce){.thumb-carousel .track{transition:none}}
+
+/* ===== Kartu proyek & sertifikat: isi sejajar antar kartu ===== */
+#projects .project,#certificates .project{display:flex;flex-direction:column}
+#projects .project .thumb,#certificates .project .thumb{flex:none}
+#projects .project .body,#certificates .project .body{display:flex;flex-direction:column;flex:1}
+#projects .project .meta,#certificates .project .meta{margin-bottom:4px}
+#projects .project .body p,#certificates .project .body p{flex:1;margin:8px 0 14px}   /* deskripsi mengisi ruang kosong */
+#projects .project .tags{margin-top:auto}                                            /* tag selalu di bawah deskripsi */
+
+/* Tombol selalu di dasar kartu, rata kiri, ukuran sama */
+#projects .project .go,#certificates .project .go{
+  align-self:flex-start;display:inline-flex;align-items:center;justify-content:center;gap:4px;
+  min-height:36px;padding:0 16px;margin-top:16px;
+  background:var(--yellow);color:var(--charcoal);border-radius:999px;
+  font-size:.82rem;font-weight:700;text-decoration:none;
+  box-shadow:0 0 0 2px var(--charcoal);transition:background .15s,color .15s
+}
+#projects .project .go::after{content:"\2197"}
+#projects .project:hover .go,#certificates .project:hover .go{background:var(--charcoal);color:var(--yellow)}
+
+/* ===== FIX: hero pas satu layar, foto menyesuaikan tinggi layar ===== */
+:root{
+  --nav-h:68px;                         /* tinggi menu + jarak atasnya */
+  --hero-pad:clamp(16px,3vh,48px);      /* jarak atas-bawah hero */
+}
+
+.hero{
+  min-height:calc(100vh - var(--nav-h));
+  min-height:calc(100svh - var(--nav-h));
+  padding-block:var(--hero-pad);
+}
+
+/* Foto: tinggi mengikuti layar, lebar otomatis dari rasio 4:5 */
+.photo{
+  width:auto;
+  max-width:100%;
+  height:min(
+    calc(100svh - var(--nav-h) - (2 * var(--hero-pad)) - 32px),  /* 32px = ruang untuk bayangan kuning */
+    640px
+  );
+  aspect-ratio:4/5;
+  justify-self:center;
+  margin-right:22px;
+}
+
+/* Tablet & HP: kembali ke ukuran kecil di kiri atas */
+@media (max-width:900px){
+  .hero{min-height:0;padding-block:32px 56px}
+  .photo{
+    height:auto;
+    width:200px;
+    max-width:200px;
+    justify-self:start;
+    margin-left:12px;
+  }
+}
+
+/* ===== FIX: kartu proyek muat satu layar, menyesuaikan tinggi layar ===== */
+@media (min-width:901px){
+  /* Thumbnail: tinggi mengikuti tinggi layar, bukan rasio tetap */
+  #projects .project .thumb{
+    aspect-ratio:auto;
+    height:clamp(120px,27vh,240px);
+  }
+
+
+  #projects .project .body{padding:14px 12px 10px}
+  #projects .project .meta{font-size:.8rem}
+
+  /* Judul lebih ringkas supaya judul panjang tidak makan banyak ruang */
+  #projects .project h3{
+    font-size:clamp(.95rem,1.6vh + .55rem,1.1rem);
+    line-height:1.35;
+  }
+
+  /* Deskripsi maksimal 2 baris */
+  #projects .project .body p{
+    font-size:.88rem;
+    line-height:1.5;
+    margin:6px 0 10px;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  #projects .project .tags{gap:5px}
+  #projects .project .tags li{font-size:.78rem;padding:3px 10px}
+
+  #projects .project .go{margin-top:12px;min-height:34px}
+}
+
+@media (min-width:901px){
+  /* Judul: tinggi tetap 3 baris, lebihnya dipotong */
+  #projects .project h3{
+    min-height:calc(3 * 1.35em);
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  /* Deskripsi: tinggi tetap 2 baris, tidak ikut melar */
+  #projects .project .body p{
+    flex:none;
+    min-height:3em;
+  }
+}
+
+/* ===== FIX: klik menu langsung berhenti di judul bagian, tanpa ruang kosong ===== */
+html{scroll-padding-top:96px}   /* tinggi menu (68px) + jarak 28px */
+
+/* Padding atas section "dibuang" dari titik berhenti scroll */
+section{scroll-margin-top:calc(-1 * clamp(64px,9vw,128px))}
+
+/* Kontak: kartu kuning, padding-nya kecil dan kartunya harus tetap utuh terlihat */
+section#contact{scroll-margin-top:0}
