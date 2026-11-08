@@ -481,3 +481,8 @@ section#contact{scroll-margin-top:0}
 @media (prefers-reduced-motion:reduce){
   .nav strong,.nav strong::before,.nav strong::after{animation:none}
 }
+
+/* ===== NAV: penanda menu aktif ===== */
+.nav a{padding:8px 16px;border-radius:999px;transition:background .25s,color .25s}
+.nav a:hover{box-shadow:none;background:rgba(16,24,32,.12)}
+.nav a.active{background:var(--charcoal);color:var(--yellow)}
