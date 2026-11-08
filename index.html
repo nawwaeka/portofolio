@@ -633,6 +633,44 @@ document.querySelectorAll('.thumb-carousel').forEach(function(box){
     box.addEventListener('mouseleave',start);
   }
 });
+
+/* Menu aktif mengikuti bagian yang sedang dilihat */
+(function(){
+  var links=document.querySelectorAll('.nav a[href^="#"]');
+  var navBox=document.querySelector('.nav .container');
+  var map={};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
+  var ids=Object.keys(map);
+
+  function setActive(id){
+    links.forEach(function(a){ a.classList.toggle('active',a===map[id]); a.removeAttribute('aria-current'); });
+    if(map[id]){
+      map[id].setAttribute('aria-current','true');
+      /* di HP: geser menu horizontal supaya link aktif kelihatan */
+      var a=map[id];
+      navBox.scrollTo({left:a.offsetLeft-navBox.clientWidth/2+a.offsetWidth/2,behavior:'smooth'});
+    }
+  }
+
+  function update(){
+    var line=window.innerHeight*0.35, current=null;
+    ids.forEach(function(id){
+      var el=document.getElementById(id);
+      if(el && el.getBoundingClientRect().top<=line) current=id;
+    });
+    /* mentok di dasar halaman = Kontak */
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) current='contact';
+    setActive(current);
+  }
+
+  var tick=false;
+  window.addEventListener('scroll',function(){
+    if(tick) return; tick=true;
+    requestAnimationFrame(function(){ update(); tick=false; });
+  },{passive:true});
+  window.addEventListener('resize',update);
+  update();
+})();
 </script>
 </body>
 </html>
