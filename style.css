@@ -446,46 +446,38 @@ section{scroll-margin-top:calc(-1 * clamp(64px,9vw,128px))}
 
 /* Kontak: kartu kuning, padding-nya kecil dan kartunya harus tetap utuh terlihat */
 section#contact{scroll-margin-top:0}
-/* ===== NAV: penanda menu aktif ===== */
-.nav a{padding:8px 16px;border-radius:999px;transition:background .25s,color .25s}
-.nav a:hover{box-shadow:none;background:rgba(16,24,32,.12)}
-.nav a.active{background:var(--charcoal);color:var(--yellow)}
 
-/* ===== NAV: nama dengan stabilo bercahaya ===== */
+/* ===== NAV: nama = badge dengan cincin cahaya berputar ===== */
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+
 .nav strong{
   position:relative;isolation:isolate;white-space:nowrap;
-  padding:3px 12px;margin-left:-12px;
+  margin-left:-10px;padding:9px 22px;
+  border-radius:999px;
+  color:var(--yellow);
+  letter-spacing:.01em;
+  animation:name-glow 2.8s ease-in-out infinite;
 }
-/* Coretan stabilo putih: tergambar dari kiri, lalu berkilau terus */
+/* Cincin cahaya yang berputar mengelilingi badge */
 .nav strong::before{
-  content:"";position:absolute;z-index:-1;inset:3px 0 1px 0;
-  background:linear-gradient(100deg,#fff 38%,#fffbd0 50%,#fff 62%);
-  background-size:250% 100%;
-  border-radius:999px 40px 999px 40px/40px 999px 40px 999px;
-  transform:rotate(-1.5deg) scaleX(0);transform-origin:left center;
-  box-shadow:0 0 0 rgba(255,255,255,0);
-  animation:
-    mark-in .9s .3s cubic-bezier(.7,0,.2,1) forwards,
-    mark-shine 3.5s 1.2s ease-in-out infinite;
+  content:"";position:absolute;z-index:-2;inset:-3px;border-radius:inherit;
+  background:conic-gradient(from var(--ang),#fff,#ff9d00 25%,#fff 45%,var(--charcoal) 60%,#ff9d00 80%,#fff);
+  box-shadow:0 0 16px rgba(255,255,255,.75);
+  animation:ring-spin 3s linear infinite;
 }
-/* Bintang kecil berkedip di pojok nama */
+/* Isi badge charcoal + kilatan cahaya yang menyapu */
 .nav strong::after{
-  content:"\2726";position:absolute;right:-6px;top:-8px;
-  font-size:.95rem;line-height:1;color:var(--charcoal);
-  opacity:0;transform:scale(.4) rotate(0);
-  animation:twinkle 3.5s 1.4s ease-in-out infinite;
+  content:"";position:absolute;z-index:-1;inset:0;border-radius:inherit;
+  background:linear-gradient(110deg,var(--charcoal) 38%,#3a4a5c 50%,var(--charcoal) 62%);
+  background-size:250% 100%;
+  animation:sheen 3.2s ease-in-out infinite;
 }
-@keyframes mark-in{to{transform:rotate(-1.5deg) scaleX(1)}}
-@keyframes mark-shine{
-  0%{background-position:100% 0;box-shadow:0 0 0 rgba(255,255,255,0)}
-  50%{box-shadow:0 0 18px 4px rgba(255,255,255,.85)}
-  100%{background-position:0 0;box-shadow:0 0 0 rgba(255,255,255,0)}
-}
-@keyframes twinkle{
-  0%,60%,100%{opacity:0;transform:scale(.4) rotate(0)}
-  75%{opacity:1;transform:scale(1.1) rotate(25deg)}
+@keyframes ring-spin{to{--ang:360deg}}
+@keyframes sheen{0%{background-position:120% 0}60%,100%{background-position:-120% 0}}
+@keyframes name-glow{
+  0%,100%{text-shadow:0 0 0 rgba(254,231,21,0)}
+  50%{text-shadow:0 0 10px rgba(254,231,21,.9),0 0 22px rgba(254,231,21,.5)}
 }
 @media (prefers-reduced-motion:reduce){
-  .nav strong::before{animation:none;transform:rotate(-1.5deg) scaleX(1)}
-  .nav strong::after{animation:none}
+  .nav strong,.nav strong::before,.nav strong::after{animation:none}
 }
